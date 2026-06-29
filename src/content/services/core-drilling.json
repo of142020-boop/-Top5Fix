@@ -1,6 +1,7 @@
 {
   "craftsmen": [
     {
+      "isActive": true,
       "subscriptionEndDate": "",
       "name": "طارق عبد الموجود علي",
       "phone": "01001122334",
