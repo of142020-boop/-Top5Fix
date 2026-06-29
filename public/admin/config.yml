@@ -18,7 +18,7 @@ collections:
     format: "json"
     extension: "json"
     fields:
-      - label: "الفنيين (Craftsmen)"
+      - label: "قائمة الفنيين والصنايعية"
         name: "craftsmen"
         widget: "list"
         summary: '{{fields.name}} - {{fields.phone}}'
@@ -41,29 +41,29 @@ collections:
           - { label: "السعر يبدأ من", name: "priceFrom", widget: "number", value_type: "int" }
           - { label: "الخدمات المكتملة", name: "completedJobs", widget: "number", value_type: "int" }
           - { label: "رأي أحد العملاء", name: "clientReview", widget: "text" }
-      - { label: "الرابط (Slug)", name: "slug", widget: "string" }
-      - { label: "المهنة (مفرد)", name: "profession", widget: "string" }
-      - { label: "المهنة (جمع)", name: "professionPlural", widget: "string" }
-      - { label: "الأيقونة (Emoji)", name: "icon", widget: "string" }
-      - { label: "اللون", name: "color", widget: "select", options: ["blue", "emerald", "amber", "rose", "slate", "purple", "cyan", "teal", "orange", "yellow", "indigo"] }
-      - { label: "عنوان السيو (Meta Title)", name: "metaTitle", widget: "string" }
-      - { label: "وصف السيو (Meta Description)", name: "metaDescription", widget: "text" }
+      - { label: "رابط الصفحة", name: "slug", widget: "string" }
+      - { label: "اسم المهنة (مفرد)", name: "profession", widget: "string" }
+      - { label: "اسم المهنة (جمع)", name: "professionPlural", widget: "string" }
+      - { label: "الأيقونة التعبيرية", name: "icon", widget: "string" }
+      - { label: "لون التصميم", name: "color", widget: "select", options: ["blue", "emerald", "amber", "rose", "slate", "purple", "cyan", "teal", "orange", "yellow", "indigo"] }
+      - { label: "عنوان محرك البحث", name: "metaTitle", widget: "string" }
+      - { label: "وصف محرك البحث", name: "metaDescription", widget: "text" }
       - { label: "المقدمة", name: "intro", widget: "text" }
-      - label: "النصائح (Tips)"
+      - label: "النصائح"
         name: "tips"
         widget: "list"
         summary: '{{fields.title}}'
         fields:
           - { label: "العنوان", name: "title", widget: "string" }
           - { label: "الوصف", name: "desc", widget: "text" }
-      - label: "الأسئلة الشائعة (FAQs)"
+      - label: "الأسئلة الشائعة"
         name: "faqs"
         widget: "list"
         summary: '{{fields.q}}'
         fields:
           - { label: "السؤال", name: "q", widget: "string" }
           - { label: "الإجابة", name: "a", widget: "text" }
-      - label: "المناطق المتاحة"
+      - label: "المناطق المتاحة للمهنة"
         name: "districts"
         widget: "list"
         field: { label: "المنطقة", name: "district", widget: "string" }
