@@ -1,9 +1,9 @@
 ---
-import type { Service } from '../data/services';
+import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CraftsmanCard from './CraftsmanCard.astro';
 
-export interface Props { service: Service; }
+export interface Props { service: CollectionEntry<'services'>['data']; }
 const { service } = Astro.props;
 const { slug, profession, professionPlural, icon, craftsmen,
         metaTitle, metaDescription, intro, tips, faqs, districts } = service;

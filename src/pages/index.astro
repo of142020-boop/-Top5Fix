@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { services } from '../data/services';
+import { getCollection } from 'astro:content';
+
+const servicesEntries = await getCollection('services');
+const services = servicesEntries.map(entry => entry.data);
 
 const pageTitle = 'Top5Fix — أفضل 5 صنايعية موثّقين في القاهرة والجيزة';
 const pageDesc  = 'دليل الصنايعية الموثوق في مصر. ابحث عن أفضل سباك، كهربائي، نجار، دهان، فني تكييف وأكثر في القاهرة والجيزة. أرقام مباشرة، واتساب، وتقييمات حقيقية.';

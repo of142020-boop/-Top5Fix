@@ -1,13 +1,13 @@
 ---
-import { services } from '../data/services';
+import { getCollection } from 'astro:content';
 import ServicePageContent from '../components/ServicePageContent.astro';
 
-export function getStaticPaths() {
-  return services
-    .map(s => ({
-      params: { service: s.slug },
-      props:  { service: s },
-    }));
+export async function getStaticPaths() {
+  const servicesEntries = await getCollection('services');
+  return servicesEntries.map(entry => ({
+    params: { service: entry.id },
+    props:  { service: entry.data },
+  }));
 }
 
 const { service } = Astro.props;
