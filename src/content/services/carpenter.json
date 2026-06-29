@@ -5,7 +5,7 @@
   "icon": "🪵",
   "color": "amber",
   "metaTitle": "أفضل نجار في القاهرة والجيزة | Top5Fix",
-  "metaDescription": "هل تبحث عن أفضل نجار في القاهرة والجيزة | Top5Fix؟ إليك قائمة تضم أفضل 5 نجارين موثقين ومحترفين. أعمال أثاث وديكور وإصلاحات. تواصل معهم مباشرة الآن!",
+  "metaDescription": "هل تبحث عن أفضل نجار في القاهرة والجيزة | Top5Fix؟ إليك قائمة تضم أفضل 5 نجارين محترفين. أعمال أثاث وديكور وإصلاحات. تواصل معهم مباشرة الآن!",
   "intro": "النجارة هي فن يمزج بين الإتقان والذوق — سواء كنت تريد تجديد أثاث قديم، تركيب مطبخ جديد، عمل غرفة نوم، أو إصلاح باب خشبي. النجار المحترف يفرق عن غيره بدقة القياس وجودة التشطيب واحترام المواعيد. في Top5Fix، اخترنا أفضل 5 نجارين في القاهرة والجيزة بناءً على تقييمات موثّقة وأعمال منجزة فعلية. سواء كنت تبحث عن نجار تخصص مطابخ أو أثاث أو باركيه أو أبواب، ستجد في قائمتنا من يناسب احتياجك وميزانيتك.",
   "tips": [
     {
@@ -72,7 +72,6 @@
         "التجمع الخامس"
       ],
       "avatar": "/images/craftsman.png",
-      "verified": true,
       "responseTime": "خلال ساعتين",
       "priceFrom": 300,
       "completedJobs": 267,
@@ -90,7 +89,6 @@
         "المهندسين"
       ],
       "avatar": "/images/craftsman.png",
-      "verified": true,
       "responseTime": "نفس اليوم",
       "priceFrom": 250,
       "completedJobs": 189,
@@ -108,7 +106,6 @@
         "المرج"
       ],
       "avatar": "/images/craftsman.png",
-      "verified": true,
       "responseTime": "اليوم التالي",
       "priceFrom": 200,
       "completedJobs": 134,
@@ -126,7 +123,6 @@
         "حدائق الأهرام"
       ],
       "avatar": "/images/craftsman.png",
-      "verified": true,
       "responseTime": "نفس اليوم",
       "priceFrom": 230,
       "completedJobs": 112,
@@ -144,7 +140,6 @@
         "العمرانية"
       ],
       "avatar": "/images/craftsman.png",
-      "verified": true,
       "responseTime": "اليوم التالي",
       "priceFrom": 180,
       "completedJobs": 87,

@@ -110,6 +110,7 @@ const jsonLdOrg = {
   <!-- ══ Stats Strip ══ -->
   <div class="bg-gray-50 border-b border-gray-200 py-8">
     <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+      {[
         { val: services.length.toString(),      label: 'خدمة منزلية',      icon: '🏠' },
         { val: totalCraftsmen.toString(),        label: 'فني في القائمة',   icon: '👷‍♂️' },
         { val: totalReviews.toLocaleString('ar')+ '+', label: 'تقييم حقيقي', icon: '⭐' },
