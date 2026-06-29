@@ -21,6 +21,8 @@ const servicesCollection = defineCollection({
     })),
     districts: z.array(z.string()),
     craftsmen: z.array(z.object({
+      isActive: z.boolean().default(true).optional(),
+      subscriptionEndDate: z.string().optional(),
       name: z.string(),
       phone: z.string(),
       rating: z.number(),

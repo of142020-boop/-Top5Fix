@@ -18,6 +18,27 @@ collections:
     format: "json"
     extension: "json"
     fields:
+      - label: "الفنيين (Craftsmen)"
+        name: "craftsmen"
+        widget: "list"
+        fields:
+          - { label: "حساب مفعل (يظهر للزوار)", name: "isActive", widget: "boolean", default: true, required: false }
+          - { label: "تاريخ انتهاء الاشتراك", name: "subscriptionEndDate", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false }
+          - { label: "الاسم", name: "name", widget: "string" }
+          - { label: "رقم الهاتف", name: "phone", widget: "string" }
+          - { label: "التقييم", name: "rating", widget: "number", value_type: "float", min: 1, max: 5 }
+          - { label: "عدد المراجعات", name: "reviewCount", widget: "number", value_type: "int" }
+          - { label: "المحافظة", name: "governorate", widget: "select", options: ["القاهرة", "الجيزة"] }
+          - label: "مناطق الفني"
+            name: "districts"
+            widget: "list"
+            field: { label: "المنطقة", name: "district", widget: "string" }
+          - { label: "مسار الصورة الرمزية", name: "avatar", widget: "string", default: "/images/craftsman.png" }
+          - { label: "موثق (علامة الصح)", name: "verified", widget: "boolean", default: true }
+          - { label: "وقت الاستجابة", name: "responseTime", widget: "string" }
+          - { label: "السعر يبدأ من", name: "priceFrom", widget: "number", value_type: "int" }
+          - { label: "الخدمات المكتملة", name: "completedJobs", widget: "number", value_type: "int" }
+          - { label: "رأي أحد العملاء", name: "clientReview", widget: "text" }
       - { label: "الرابط (Slug)", name: "slug", widget: "string" }
       - { label: "المهنة (مفرد)", name: "profession", widget: "string" }
       - { label: "المهنة (جمع)", name: "professionPlural", widget: "string" }
@@ -42,22 +63,3 @@ collections:
         name: "districts"
         widget: "list"
         field: { label: "المنطقة", name: "district", widget: "string" }
-      - label: "الفنيين (Craftsmen)"
-        name: "craftsmen"
-        widget: "list"
-        fields:
-          - { label: "الاسم", name: "name", widget: "string" }
-          - { label: "رقم الهاتف", name: "phone", widget: "string" }
-          - { label: "التقييم", name: "rating", widget: "number", value_type: "float", min: 1, max: 5 }
-          - { label: "عدد المراجعات", name: "reviewCount", widget: "number", value_type: "int" }
-          - { label: "المحافظة", name: "governorate", widget: "select", options: ["القاهرة", "الجيزة"] }
-          - label: "مناطق الفني"
-            name: "districts"
-            widget: "list"
-            field: { label: "المنطقة", name: "district", widget: "string" }
-          - { label: "مسار الصورة الرمزية", name: "avatar", widget: "string", default: "/images/craftsman.png" }
-          - { label: "موثق (علامة الصح)", name: "verified", widget: "boolean", default: true }
-          - { label: "وقت الاستجابة", name: "responseTime", widget: "string" }
-          - { label: "السعر يبدأ من", name: "priceFrom", widget: "number", value_type: "int" }
-          - { label: "الخدمات المكتملة", name: "completedJobs", widget: "number", value_type: "int" }
-          - { label: "رأي أحد العملاء", name: "clientReview", widget: "text" }
