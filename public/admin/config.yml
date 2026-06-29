@@ -21,6 +21,8 @@ collections:
       - label: "الفنيين (Craftsmen)"
         name: "craftsmen"
         widget: "list"
+        summary: '{{fields.name}} - {{fields.phone}}'
+        collapsed: false
         fields:
           - { label: "حساب مفعل (يظهر للزوار)", name: "isActive", widget: "boolean", default: true, required: false }
           - { label: "تاريخ انتهاء الاشتراك", name: "subscriptionEndDate", widget: "datetime", date_format: "DD/MM/YYYY", time_format: false, format: "YYYY-MM-DD", required: false }
@@ -50,12 +52,14 @@ collections:
       - label: "النصائح (Tips)"
         name: "tips"
         widget: "list"
+        summary: '{{fields.title}}'
         fields:
           - { label: "العنوان", name: "title", widget: "string" }
           - { label: "الوصف", name: "desc", widget: "text" }
       - label: "الأسئلة الشائعة (FAQs)"
         name: "faqs"
         widget: "list"
+        summary: '{{fields.q}}'
         fields:
           - { label: "السؤال", name: "q", widget: "string" }
           - { label: "الإجابة", name: "a", widget: "text" }
