@@ -1,4 +1,98 @@
 {
+  "craftsmen": [
+    {
+      "accountStatus": "موقوف",
+      "name": "علاء الدين صبري عمر",
+      "phone": "01003334455",
+      "whatsapp": "",
+      "governorate": "القاهرة",
+      "avatar": "/images/craftsman.png",
+      "clientReview": "عنده أجهزة قياس محترفة وشرح لي حالة التكييف بالتفصيل",
+      "completedJobs": 389,
+      "priceFrom": 200,
+      "responseTime": "خلال ساعة",
+      "verified": true,
+      "districts": [
+        "مدينة نصر",
+        "التجمع الخامس",
+        "هليوبوليس"
+      ],
+      "reviewCount": 115,
+      "rating": 4.9
+    },
+    {
+      "name": "خالد منير الشناوي",
+      "phone": "01144556677",
+      "governorate": "القاهرة",
+      "avatar": "/images/craftsman.png",
+      "clientReview": "بيجي بدري وبيخلّص بسرعة",
+      "completedJobs": 234,
+      "priceFrom": 250,
+      "responseTime": "خلال ساعتين",
+      "verified": true,
+      "districts": [
+        "الزمالك",
+        "الدقي",
+        "الجيزة"
+      ],
+      "reviewCount": 82,
+      "rating": 4.8
+    },
+    {
+      "name": "ماهر عزت قنديل",
+      "phone": "01555667788",
+      "governorate": "القاهرة",
+      "avatar": "/images/craftsman.png",
+      "clientReview": "صادق في الكلام، قالي الغاز كافي ماشحنش علطول",
+      "completedJobs": 178,
+      "priceFrom": 200,
+      "responseTime": "نفس اليوم",
+      "verified": true,
+      "districts": [
+        "شبرا",
+        "المرج",
+        "شبرا الخيمة"
+      ],
+      "reviewCount": 61,
+      "rating": 4.7
+    },
+    {
+      "name": "أحمد فاروق نجيب",
+      "phone": "01266778899",
+      "governorate": "الجيزة",
+      "avatar": "/images/craftsman.png",
+      "clientReview": "أسعاره منطقية وشغله متقن",
+      "completedJobs": 112,
+      "priceFrom": 220,
+      "responseTime": "خلال ساعتين",
+      "verified": true,
+      "districts": [
+        "الشيخ زايد",
+        "أكتوبر",
+        "حدائق الأهرام"
+      ],
+      "reviewCount": 38,
+      "rating": 4.6
+    },
+    {
+      "name": "سلامة حسن الريفي",
+      "phone": "01677889900",
+      "governorate": "الجيزة",
+      "avatar": "/images/craftsman.png",
+      "clientReview": "بيشرح المشكلة وإيه اللي عمله",
+      "completedJobs": 89,
+      "priceFrom": 180,
+      "responseTime": "نفس اليوم",
+      "verified": true,
+      "districts": [
+        "الهرم",
+        "فيصل",
+        "العمرانية"
+      ],
+      "reviewCount": 24,
+      "rating": 4.5
+    }
+  ],
   "slug": "ac-tech",
   "profession": "فني تكييف",
   "professionPlural": "فنيي تكييف",
@@ -58,97 +152,5 @@
     "أكتوبر",
     "فيصل",
     "الهرم"
-  ],
-  "craftsmen": [
-    {
-      "name": "علاء الدين صبري",
-      "phone": "01003334455",
-      "rating": 4.9,
-      "reviewCount": 115,
-      "governorate": "القاهرة",
-      "districts": [
-        "مدينة نصر",
-        "التجمع الخامس",
-        "هليوبوليس"
-      ],
-      "avatar": "/images/craftsman.png",
-      "verified": true,
-      "responseTime": "خلال ساعة",
-      "priceFrom": 200,
-      "completedJobs": 389,
-      "clientReview": "عنده أجهزة قياس محترفة وشرح لي حالة التكييف بالتفصيل"
-    },
-    {
-      "name": "خالد منير الشناوي",
-      "phone": "01144556677",
-      "rating": 4.8,
-      "reviewCount": 82,
-      "governorate": "القاهرة",
-      "districts": [
-        "الزمالك",
-        "الدقي",
-        "الجيزة"
-      ],
-      "avatar": "/images/craftsman.png",
-      "verified": true,
-      "responseTime": "خلال ساعتين",
-      "priceFrom": 250,
-      "completedJobs": 234,
-      "clientReview": "بيجي بدري وبيخلّص بسرعة"
-    },
-    {
-      "name": "ماهر عزت قنديل",
-      "phone": "01555667788",
-      "rating": 4.7,
-      "reviewCount": 61,
-      "governorate": "القاهرة",
-      "districts": [
-        "شبرا",
-        "المرج",
-        "شبرا الخيمة"
-      ],
-      "avatar": "/images/craftsman.png",
-      "verified": true,
-      "responseTime": "نفس اليوم",
-      "priceFrom": 200,
-      "completedJobs": 178,
-      "clientReview": "صادق في الكلام، قالي الغاز كافي ماشحنش علطول"
-    },
-    {
-      "name": "أحمد فاروق نجيب",
-      "phone": "01266778899",
-      "rating": 4.6,
-      "reviewCount": 38,
-      "governorate": "الجيزة",
-      "districts": [
-        "الشيخ زايد",
-        "أكتوبر",
-        "حدائق الأهرام"
-      ],
-      "avatar": "/images/craftsman.png",
-      "verified": true,
-      "responseTime": "خلال ساعتين",
-      "priceFrom": 220,
-      "completedJobs": 112,
-      "clientReview": "أسعاره منطقية وشغله متقن"
-    },
-    {
-      "name": "سلامة حسن الريفي",
-      "phone": "01677889900",
-      "rating": 4.5,
-      "reviewCount": 24,
-      "governorate": "الجيزة",
-      "districts": [
-        "الهرم",
-        "فيصل",
-        "العمرانية"
-      ],
-      "avatar": "/images/craftsman.png",
-      "verified": true,
-      "responseTime": "نفس اليوم",
-      "priceFrom": 180,
-      "completedJobs": 89,
-      "clientReview": "بيشرح المشكلة وإيه اللي عمله"
-    }
   ]
 }
