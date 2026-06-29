@@ -18,7 +18,6 @@ collections:
     format: "json"
     extension: "json"
     fields:
-      - { label: "الرقم التعريفي (ID)", name: "id", widget: "string" }
       - { label: "الرابط (Slug)", name: "slug", widget: "string" }
       - { label: "المهنة (مفرد)", name: "profession", widget: "string" }
       - { label: "المهنة (جمع)", name: "professionPlural", widget: "string" }
