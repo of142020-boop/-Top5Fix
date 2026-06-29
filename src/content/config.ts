@@ -22,6 +22,7 @@ const servicesCollection = defineCollection({
     districts: z.array(z.string()),
     craftsmen: z.array(z.object({
       isActive: z.boolean().default(true).optional(),
+      accountStatus: z.enum(['مفعل', 'موقوف']).default('مفعل').optional(),
       name: z.string(),
       phone: z.string(),
       whatsapp: z.string().optional(),

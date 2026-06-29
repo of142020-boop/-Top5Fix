@@ -7,11 +7,12 @@ export interface Props {
   avatar: string;
   profession: string;
   isActive?: boolean;
+  accountStatus?: string;
   color?: string;
 }
 
 const {
-  name, phone, whatsapp, governorate, avatar, profession, isActive, color = 'blue'
+  name, phone, whatsapp, governorate, avatar, profession, isActive, accountStatus, color = 'blue'
 } = Astro.props;
 
 // Use whatsapp if available, otherwise fallback to phone
@@ -20,7 +21,7 @@ const waNumber = whatsapp || phone;
 const waMsg  = encodeURIComponent(`أهلاً، وجدتك على Top5Fix وأريد الاستفسار عن خدمة ${profession}`);
 const waLink = `https://wa.me/2${waNumber}?text=${waMsg}`;
 
-const isSuspended = isActive === false;
+const isSuspended = accountStatus === 'موقوف' || isActive === false;
 
 const colorMap: Record<string, string> = {
   blue: 'border-blue-400 shadow-blue-100 from-blue-50 to-blue-100/50',

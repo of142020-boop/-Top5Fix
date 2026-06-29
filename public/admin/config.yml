@@ -26,7 +26,7 @@ collections:
         summary: '{{fields.name}} - {{fields.phone}}'
         collapsed: false
         fields:
-          - { label: "حساب مفعل (يظهر للزوار)", name: "isActive", widget: "boolean", default: true, required: false }
+          - { label: "حالة الحساب", name: "accountStatus", widget: "select", options: ["مفعل", "موقوف"], default: "مفعل" }
           - { label: "الاسم", name: "name", widget: "string" }
           - { label: "رقم الاتصال", name: "phone", widget: "string" }
           - { label: "رقم الواتساب (اختياري)", name: "whatsapp", widget: "string", required: false }
