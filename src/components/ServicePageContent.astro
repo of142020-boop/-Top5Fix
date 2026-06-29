@@ -6,12 +6,10 @@ import CraftsmanCard from './CraftsmanCard.astro';
 export interface Props { service: CollectionEntry<'services'>['data']; }
 const { service } = Astro.props;
 const { slug, profession, professionPlural, icon, craftsmen,
-        metaTitle, metaDescription, intro, tips, faqs, districts } = service;
+        metaTitle, metaDescription, intro, tips, faqs, districts, color } = service;
 
 const cairoCount   = craftsmen.filter(c => c.governorate === 'القاهرة').length;
 const gizaCount    = craftsmen.filter(c => c.governorate === 'الجيزة').length;
-const avgRating    = (craftsmen.reduce((s, c) => s + c.rating, 0) / craftsmen.length).toFixed(1);
-const totalReviews = craftsmen.reduce((s, c) => s + c.reviewCount, 0);
 const canonicalUrl = `https://top5fix.com/${slug}`;
 
 const waRequestMsg = encodeURIComponent(`أهلاً Top5Fix، أحتاج ${profession} في منطقتي. هل يمكن مساعدتي؟`);
@@ -31,13 +29,7 @@ const jsonLdList = {
       '@type': 'LocalBusiness',
       name: c.name,
       telephone: c.phone,
-      areaServed: [c.governorate, ...c.districts].join('، '),
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: c.rating,
-        reviewCount: c.reviewCount,
-        bestRating: 5,
-      },
+      areaServed: [c.governorate].join('، '),
     },
   })),
 };
@@ -103,7 +95,7 @@ const jsonLdBreadcrumb = {
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
         </span>
-        <span>متاح الآن {craftsmen.filter(c => c.verified).length} فنيين موثّقين</span>
+        <span>متاح الآن {craftsmen.length} فنيين محترفين</span>
       </div>
 
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6">
@@ -118,8 +110,7 @@ const jsonLdBreadcrumb = {
       <!-- Stats row -->
       <div class="flex flex-wrap justify-center gap-4">
         {[
-          { val: avgRating + '/5', label: 'متوسط التقييم', icon: '⭐', color: 'text-amber-500' },
-          { val: totalReviews + '+', label: 'تقييم موثّق', icon: '💬', color: 'text-blue-500' },
+          { val: craftsmen.length + ' فنيين', label: 'إجمالي الفنيين', icon: '👨‍🔧', color: 'text-blue-600' },
           { val: cairoCount + ' فنيين', label: 'القاهرة', icon: '🟢', color: 'text-emerald-500' },
           { val: gizaCount + ' فنيين', label: 'الجيزة', icon: '🔵', color: 'text-blue-600' },
         ].map(s => (
@@ -174,7 +165,7 @@ const jsonLdBreadcrumb = {
             data-gov={craftsman.governorate === 'القاهرة' ? 'cairo' : 'giza'}
             class="craftsman-item h-full"
           >
-            <CraftsmanCard {...craftsman} profession={profession} />
+            <CraftsmanCard {...craftsman} profession={profession} color={color} />
           </div>
         ))}
       </div>
