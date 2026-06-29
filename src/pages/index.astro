@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services } from '../data/services';
+
+const pageTitle = 'Top5Fix — أفضل 5 صنايعية موثّقين في القاهرة والجيزة';
+const pageDesc  = 'دليل الصنايعية الموثوق في مصر. ابحث عن أفضل سباك، كهربائي، نجار، دهان، فني تكييف وأكثر في القاهرة والجيزة. أرقام مباشرة، واتساب، وتقييمات حقيقية.';
+
+// Light theme color map for icons
+const colorMap: Record<string, { iconBg: string; text: string; }> = {
+  orange: { iconBg: 'bg-orange-100', text: 'text-orange-600' },
+  yellow: { iconBg: 'bg-yellow-100', text: 'text-yellow-600' },
+  amber:  { iconBg: 'bg-amber-100',  text: 'text-amber-600'  },
+  purple: { iconBg: 'bg-purple-100', text: 'text-purple-600' },
+  cyan:   { iconBg: 'bg-cyan-100',   text: 'text-cyan-600'   },
+  teal:   { iconBg: 'bg-teal-100',   text: 'text-teal-600'   },
+  slate:  { iconBg: 'bg-slate-100',  text: 'text-slate-600'  },
+  rose:   { iconBg: 'bg-rose-100',   text: 'text-rose-600'   },
+  indigo: { iconBg: 'bg-indigo-100', text: 'text-indigo-600' },
+  lime:   { iconBg: 'bg-lime-100',   text: 'text-lime-600'   },
+  pink:   { iconBg: 'bg-pink-100',   text: 'text-pink-600'   },
+  sky:    { iconBg: 'bg-sky-100',    text: 'text-sky-600'    },
+  stone:  { iconBg: 'bg-stone-100',  text: 'text-stone-600'  },
+  zinc:   { iconBg: 'bg-zinc-100',   text: 'text-zinc-600'   },
+  brown:  { iconBg: 'bg-amber-900/10',text: 'text-amber-800'  },
+  blue:   { iconBg: 'bg-blue-100',   text: 'text-blue-600'   },
+  violet: { iconBg: 'bg-violet-100', text: 'text-violet-600' },
+};
+
+const totalCraftsmen = services.reduce((s, srv) => s + srv.craftsmen.length, 0);
+const totalReviews   = services.reduce((s, srv) => s + srv.craftsmen.reduce((r, c) => r + c.reviewCount, 0), 0);
+const verifiedCount  = services.reduce((s, srv) => s + srv.craftsmen.filter(c => c.verified).length, 0);
+
+const jsonLdOrg = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Top5Fix',
+  url: 'https://top5fix.com',
+  description: pageDesc,
+  areaServed: ['القاهرة', 'الجيزة'],
+  serviceType: services.map(s => s.profession),
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDesc} canonical="https://top5fix.com/">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdOrg)} />
+
+  <!-- ══ White Header Nav ══ -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 font-black text-2xl text-gray-900">
+        <span class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/30">🔧</span>
+        <span>Top5<span class="text-blue-600">Fix</span></span>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500 font-semibold bg-gray-100 px-4 py-1.5 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>{totalCraftsmen} فني متاح الآن</span>
+      </div>
+      <a
+        href="#services"
+        class="text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors px-6 py-2.5 rounded-xl shadow-md shadow-blue-600/25"
+      >
+        اطلب خدمة
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══ Light Hero ══ -->
+  <header class="relative bg-white overflow-hidden pb-16 pt-20 border-b border-gray-100">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-48 start-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-50 rounded-full blur-3xl opacity-60"></div>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto px-4 text-center">
+      <!-- Floating badge -->
+      <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-bold text-sm shadow-sm">
+        <span>🛡️</span>
+        الدليل الموثوق للصنايعية في مصر · {new Date().getFullYear()}
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6">
+        ابحث عن <span class="text-blue-600">أفضل صنايعية</span><br />
+        في القاهرة والجيزة
+      </h1>
+
+      <p class="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+        أرقام مباشرة، تقييمات حقيقية، وتواصل سريع عبر واتساب.<br>
+        <span class="text-gray-800 font-bold bg-yellow-100 px-2 py-0.5 rounded">بدون وسيط ولا عمولة نهائياً.</span>
+      </p>
+
+      <!-- Quick WhatsApp CTA -->
+      <div class="flex flex-wrap justify-center gap-4 mb-14">
+        <a href="#services"
+           class="flex items-center gap-2 px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-2xl shadow-lg shadow-gray-900/20 transition-all duration-200 hover:-translate-y-1 text-lg">
+          <span>تصفح الخدمات</span>
+          <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/201000000000?text=أريد%20الاستفسار%20عن%20خدمة"
+           target="_blank" rel="noopener"
+           class="flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-200 hover:border-green-500 font-bold rounded-2xl shadow-md transition-all duration-200 hover:-translate-y-1 text-lg group">
+          <svg class="w-6 h-6 text-[#25D366] group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>التواصل مع إدارة الموقع</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ Stats Strip ══ -->
+  <div class="bg-gray-50 border-b border-gray-200 py-8">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+      {[
+        { val: services.length.toString(),      label: 'خدمة منزلية',      icon: '🏠' },
+        { val: totalCraftsmen.toString(),        label: 'فني في القائمة',   icon: '👷‍♂️' },
+        { val: verifiedCount.toString() + ' ✓', label: 'فني موثّق ومُختبَر', icon: '🛡️' },
+        { val: totalReviews.toLocaleString('ar')+ '+', label: 'تقييم حقيقي', icon: '⭐' },
+      ].map(s => (
+        <div class="flex flex-col items-center justify-center p-2">
+          <span class="text-3xl mb-2">{s.icon}</span>
+          <p class="text-2xl font-black text-gray-900">{s.val}</p>
+          <p class="text-gray-500 font-semibold mt-1">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <main id="main-content" class="bg-gray-50 pt-16 pb-24">
+
+    <!-- ══ Services Grid (Clean White Cards) ══ -->
+    <section id="services" class="max-w-6xl mx-auto px-4" aria-label="الخدمات المتاحة">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">الخدمات المتاحة للحجز</h2>
+        <p class="text-gray-500 text-lg font-medium">اختر الخدمة لرؤية قائمة أفضل 5 فنيين موثّقين</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+        {services.map((service) => {
+          const c = colorMap[service.color] ?? colorMap.blue;
+          const verifiedCnt = service.craftsmen.filter(cr => cr.verified).length;
+          const minPrice    = Math.min(...service.craftsmen.map(cr => cr.priceFrom));
+
+          return (
+            <a
+              href={`/${service.slug}`}
+              id={`service-${service.slug}`}
+              class="group bg-white rounded-[24px] border border-gray-200 p-6 sm:p-8 flex flex-col items-center text-center
+                     shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-blue-200
+                     transition-all duration-300"
+              aria-label={`${service.professionPlural} — احجز الآن`}
+            >
+              <!-- Big Icon -->
+              <div class={`w-16 h-16 sm:w-20 sm:h-20 rounded-full ${c.iconBg} ${c.text} flex items-center justify-center text-3xl sm:text-4xl mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                {service.icon}
+              </div>
+
+              <!-- Content -->
+              <h3 class="font-black text-gray-900 text-lg sm:text-xl mb-2">{service.profession}</h3>
+              
+              <div class="flex flex-col items-center gap-1.5 text-sm text-gray-500 font-semibold">
+                <span class="inline-flex items-center gap-1 bg-gray-50 px-3 py-1 rounded-full">
+                  <span class="text-emerald-500">✓</span> {verifiedCnt} موثّق
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- ══ Trust Section ══ -->
+    <section class="max-w-6xl mx-auto px-4 mt-24">
+      <div class="bg-white rounded-[32px] border border-gray-200 p-8 sm:p-12 shadow-sm">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-4">لماذا تعتمد على Top5Fix؟</h2>
+          <p class="text-gray-500 text-lg font-medium">ليس مجرد دليل، بل شبكة من المحترفين المختارين بعناية.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
+          {[
+            {
+              icon: '🛡️',
+              title: 'توثيق صارم',
+              desc: 'نقوم بالتحقق من البطاقة الشخصية، وسابقة الأعمال، واختبار المهارة لكل فني قبل إضافته.'
+            },
+            {
+              icon: '💬',
+              title: 'بدون وسيط تماماً',
+              desc: 'نحن لا نتدخل في الاتفاق. تتواصل مع الفني مباشرة هاتفياً أو عبر واتساب، وتتفق على السعر.'
+            },
+            {
+              icon: '⭐',
+              title: 'تقييمات واقعية',
+              desc: 'يتم مراقبة التقييمات دورياً واستبعاد أي فني يقل تقييمه أو تكثر شكاوى العملاء ضده.'
+            }
+          ].map(t => (
+            <div class="text-center flex flex-col items-center">
+              <div class="w-16 h-16 bg-blue-50 text-3xl flex items-center justify-center rounded-2xl mb-6">
+                {t.icon}
+              </div>
+              <h3 class="font-black text-gray-900 text-xl mb-3">{t.title}</h3>
+              <p class="text-gray-600 font-medium leading-relaxed">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ Footer ══ -->
+  <footer class="bg-white border-t border-gray-200 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+        <div class="flex items-center gap-2 font-black text-2xl text-gray-900">
+          <span class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/30">🔧</span>
+          <span>Top5<span class="text-blue-600">Fix</span></span>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8 font-bold text-gray-500">
+          <a href="#services" class="hover:text-blue-600 transition-colors">الخدمات</a>
+          <a href="/about" class="hover:text-blue-600 transition-colors">من نحن</a>
+          <a href="/join" class="hover:text-blue-600 transition-colors">انضم كصنايعي</a>
+          <a href="/contact" class="hover:text-blue-600 transition-colors">تواصل معنا</a>
+          <a href="/privacy" class="hover:text-blue-600 transition-colors">سياسة الخصوصية</a>
+          <a href="/terms" class="hover:text-blue-600 transition-colors">شروط الاستخدام</a>
+        </div>
+      </div>
+      <div class="h-px bg-gray-100 mb-8"></div>
+      <div class="text-center text-gray-400 font-semibold text-sm">
+        <p>© {new Date().getFullYear()} Top5Fix.com. دليل الصنايعية الأول في مصر.</p>
+      </div>
+    </div>
+  </footer>
+
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="عذراً، الصفحة غير موجودة — Top5Fix" description="الصفحة التي تبحث عنها غير موجودة.">
+  <nav class="bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-gray-900 font-black text-xl">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">🔧</span>
+        Top5<span class="text-blue-600">Fix</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="bg-gray-50 min-h-[80vh] flex flex-col items-center justify-center text-center px-4">
+    <div class="text-9xl mb-6 drop-shadow-md">🚧</div>
+    <h1 class="text-6xl sm:text-8xl font-black text-gray-900 mb-4">404</h1>
+    <h2 class="text-2xl sm:text-3xl font-black text-gray-600 mb-8">عذراً، الصفحة التي تبحث عنها غير موجودة.</h2>
+    <p class="text-gray-500 font-medium mb-8 max-w-md">يبدو أن الرابط الذي اتبعته خاطئ أو تم تغيير مسار الصفحة. لا تقلق، يمكنك العودة للصفحة الرئيسية ومتابعة تصفح الخدمات.</p>
+    <a href="/" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 hover:-translate-y-1 transition-all shadow-md shadow-blue-600/20">العودة للرئيسية</a>
+  </main>
+
+  <footer class="bg-white border-t border-gray-200 py-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 font-bold text-gray-500 mb-6 text-sm">
+        <a href="/" class="hover:text-blue-600 transition-colors">الرئيسية</a>
+        <a href="/about" class="hover:text-blue-600 transition-colors">من نحن</a>
+        <a href="/join" class="hover:text-blue-600 transition-colors">انضم كصنايعي</a>
+        <a href="/contact" class="hover:text-blue-600 transition-colors">تواصل معنا</a>
+        <a href="/privacy" class="hover:text-blue-600 transition-colors">سياسة الخصوصية</a>
+        <a href="/terms" class="hover:text-blue-600 transition-colors">شروط الاستخدام</a>
+      </div>
+      <p class="text-gray-400 font-semibold text-xs">© {new Date().getFullYear()} Top5Fix.com. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+</BaseLayout>

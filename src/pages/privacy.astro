@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="سياسة الخصوصية — Top5Fix" description="سياسة الخصوصية لمنصة Top5Fix لحماية بيانات المستخدمين.">
+  <nav class="bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-gray-900 font-black text-xl">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">🔧</span>
+        Top5<span class="text-blue-600">Fix</span>
+      </a>
+      <a href="/" class="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors">العودة للرئيسية</a>
+    </div>
+  </nav>
+
+  <main class="bg-gray-50 pt-16 pb-24 min-h-[80vh]">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 shadow-sm">
+        <h1 class="text-4xl font-black text-gray-900 mb-8 text-center">سياسة الخصوصية</h1>
+        
+        <div class="space-y-6 text-gray-600 font-medium leading-relaxed text-base">
+          <p>
+            تاريخ التحديث الأخير: {new Date().toLocaleDateString('ar-EG')}
+          </p>
+          <p>
+            في Top5Fix، نحن ندرك أهمية الخصوصية ونلتزم بحماية بياناتك الشخصية. توضح هذه السياسة كيف نقوم بجمع واستخدام وحماية المعلومات عند زيارتك لموقعنا.
+          </p>
+          
+          <h2 class="text-xl font-black text-gray-900 pt-4">1. المعلومات التي نجمعها</h2>
+          <p>نحن لا نقوم بجمع معلومات شخصية منك إلا إذا قمت بتقديمها طواعية عبر نماذج الاتصال، مثل: الاسم، رقم الهاتف، والبريد الإلكتروني. كما نجمع معلومات غير شخصية تلقائياً مثل نوع المتصفح وعنوان الـ IP لتحليل وتحسين أداء الموقع.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">2. استخدام المعلومات</h2>
+          <p>نستخدم المعلومات التي نجمعها لـ:</p>
+          <ul class="list-disc list-inside">
+            <li>تسهيل تواصلك مع الفنيين والصنايعية المتاحين على المنصة.</li>
+            <li>تحسين جودة خدماتنا وتجربة المستخدم.</li>
+            <li>التواصل معك في حال تقديمك لاستفسار أو طلب دعم فني.</li>
+          </ul>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">3. مشاركة المعلومات</h2>
+          <p>نحن لا نبيع أو نؤجر بياناتك الشخصية لأي أطراف ثالثة. يتم مشاركة بيانات الاتصال الخاصة بك فقط مع الفني الذي تختار التواصل معه لإنجاز الخدمة التي تطلبها.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">4. أمن البيانات</h2>
+          <p>نتخذ إجراءات أمنية تقنية وتنظيمية معقولة لحماية بياناتك من الوصول غير المصرح به أو التعديل أو التدمير.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">5. الاتصال بنا</h2>
+          <p>إذا كانت لديك أي أسئلة حول سياسة الخصوصية هذه، يمكنك التواصل معنا عبر البريد الإلكتروني: <a href="mailto:privacy@top5fix.com" class="text-blue-600 hover:underline">privacy@top5fix.com</a>.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white border-t border-gray-200 py-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 font-bold text-gray-500 mb-6 text-sm">
+        <a href="/" class="hover:text-blue-600 transition-colors">الرئيسية</a>
+        <a href="/about" class="hover:text-blue-600 transition-colors">من نحن</a>
+        <a href="/join" class="hover:text-blue-600 transition-colors">انضم كصنايعي</a>
+        <a href="/contact" class="hover:text-blue-600 transition-colors">تواصل معنا</a>
+        <a href="/privacy" class="text-blue-600 transition-colors">سياسة الخصوصية</a>
+        <a href="/terms" class="hover:text-blue-600 transition-colors">شروط الاستخدام</a>
+      </div>
+      <p class="text-gray-400 font-semibold text-xs">© {new Date().getFullYear()} Top5Fix.com. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+</BaseLayout>

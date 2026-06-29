@@ -1,0 +1,336 @@
+---
+import type { Service } from '../data/services';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CraftsmanCard from './CraftsmanCard.astro';
+
+export interface Props { service: Service; }
+const { service } = Astro.props;
+const { slug, profession, professionPlural, icon, craftsmen,
+        metaTitle, metaDescription, intro, tips, faqs, districts } = service;
+
+const cairoCount   = craftsmen.filter(c => c.governorate === 'القاهرة').length;
+const gizaCount    = craftsmen.filter(c => c.governorate === 'الجيزة').length;
+const avgRating    = (craftsmen.reduce((s, c) => s + c.rating, 0) / craftsmen.length).toFixed(1);
+const totalReviews = craftsmen.reduce((s, c) => s + c.reviewCount, 0);
+const canonicalUrl = `https://top5fix.com/${slug}`;
+
+const waRequestMsg = encodeURIComponent(`أهلاً Top5Fix، أحتاج ${profession} في منطقتي. هل يمكن مساعدتي؟`);
+const waRequestLink = `https://wa.me/201000000000?text=${waRequestMsg}`;
+
+const jsonLdList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: metaTitle,
+  description: metaDescription,
+  url: canonicalUrl,
+  numberOfItems: craftsmen.length,
+  itemListElement: craftsmen.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'LocalBusiness',
+      name: c.name,
+      telephone: c.phone,
+      areaServed: [c.governorate, ...c.districts].join('، '),
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: c.rating,
+        reviewCount: c.reviewCount,
+        bestRating: 5,
+      },
+    },
+  })),
+};
+
+const jsonLdFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const jsonLdBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: 'https://top5fix.com/' },
+    { '@type': 'ListItem', position: 2, name: professionPlural, item: canonicalUrl },
+  ],
+};
+---
+
+<BaseLayout title={metaTitle} description={metaDescription} canonical={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdList)} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdFaq)} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdBreadcrumb)} />
+
+  <!-- ══ Sticky Nav ══ -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-2 text-gray-900 hover:text-blue-600 transition-colors font-black text-xl">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">🔧</span>
+        Top5<span class="text-blue-600">Fix</span>
+      </a>
+      <!-- Breadcrumb -->
+      <ol class="hidden sm:flex items-center gap-2 text-sm text-gray-500 font-semibold" aria-label="مسار التنقل">
+        <li><a href="/" class="hover:text-blue-600 transition-colors">الرئيسية</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="text-gray-900">{professionPlural}</li>
+      </ol>
+      <!-- WhatsApp CTA -->
+      <a
+        href="/join"
+        class="flex items-center gap-1.5 text-sm font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors px-4 py-2 rounded-xl shadow-sm"
+      >
+        انضم كصنايعي
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══ Light Hero ══ -->
+  <header class="relative bg-white border-b border-gray-100 overflow-hidden pb-12 pt-16">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-32 start-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-50/80 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="relative max-w-4xl mx-auto px-4 text-center">
+      <!-- Live badge -->
+      <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full text-emerald-700 font-bold text-sm shadow-sm">
+        <span class="flex h-2.5 w-2.5 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span>متاح الآن {craftsmen.filter(c => c.verified).length} فنيين موثّقين</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6">
+        <span class="text-6xl me-3 block mb-4" aria-hidden="true">{icon}</span>
+        أفضل 5 <span class="text-blue-600">{profession}</span><br/>
+        في القاهرة والجيزة
+      </h1>
+      <p class="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+        قائمة موثّقة ومُختبَرة — تقييمات حقيقية، أرقام مباشرة، واتساب فوري.
+      </p>
+
+      <!-- Stats row -->
+      <div class="flex flex-wrap justify-center gap-4">
+        {[
+          { val: avgRating + '/5', label: 'متوسط التقييم', icon: '⭐', color: 'text-amber-500' },
+          { val: totalReviews + '+', label: 'تقييم موثّق', icon: '💬', color: 'text-blue-500' },
+          { val: cairoCount + ' فنيين', label: 'القاهرة', icon: '🟢', color: 'text-emerald-500' },
+          { val: gizaCount + ' فنيين', label: 'الجيزة', icon: '🔵', color: 'text-blue-600' },
+        ].map(s => (
+          <div class="flex items-center gap-3 bg-white border border-gray-200 shadow-sm rounded-2xl px-5 py-3">
+            <span class={`text-2xl ${s.color}`}>{s.icon}</span>
+            <div class="text-start">
+              <p class="font-black text-gray-900 leading-none mb-1 text-lg">{s.val}</p>
+              <p class="text-gray-500 text-xs font-semibold">{s.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="bg-gray-50 pt-16 pb-24 space-y-20">
+
+    <!-- ══ District Filter + Cards Grid ══ -->
+    <section id="craftsmen" class="max-w-6xl mx-auto px-4" aria-label={`قائمة ${professionPlural}`}>
+      <!-- Filter header -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900">اختر الفني المناسب لك</h2>
+        <div class="flex gap-2 text-sm font-bold flex-wrap justify-center bg-white p-1.5 rounded-full border border-gray-200 shadow-sm">
+          <button
+            onclick="filterCraftsmen('all')"
+            id="filter-all"
+            class="filter-btn active-filter px-6 py-2 rounded-full bg-blue-600 text-white shadow-sm transition-all"
+          >
+            الكل ({craftsmen.length})
+          </button>
+          <button
+            onclick="filterCraftsmen('cairo')"
+            id="filter-cairo"
+            class="filter-btn px-6 py-2 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-all"
+          >
+            القاهرة ({cairoCount})
+          </button>
+          <button
+            onclick="filterCraftsmen('giza')"
+            id="filter-giza"
+            class="filter-btn px-6 py-2 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition-all"
+          >
+            الجيزة ({gizaCount})
+          </button>
+        </div>
+      </div>
+
+      <div id="craftsmen-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" role="list">
+        {craftsmen.map((craftsman, i) => (
+          <div
+            role="listitem"
+            data-gov={craftsman.governorate === 'القاهرة' ? 'cairo' : 'giza'}
+            class="craftsman-item h-full"
+          >
+            <CraftsmanCard {...craftsman} profession={profession} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ══ Editorial Content ══ -->
+    <div class="max-w-4xl mx-auto px-4 space-y-16">
+      
+      <!-- Intro -->
+      <section class="bg-white border border-gray-200 shadow-sm rounded-[32px] p-8 sm:p-12">
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-6">
+          🔍 كيف تختار أفضل {profession}؟
+        </h2>
+        <p class="text-gray-600 leading-loose text-lg font-medium">{intro}</p>
+      </section>
+
+      <!-- Tips -->
+      <section>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-8">💡 نصائح مهمة قبل الاتصال</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {tips.map((tip, i) => (
+            <div class="flex gap-5 bg-white border border-gray-200 shadow-sm rounded-2xl p-6 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-lg shrink-0">
+                {i + 1}
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-900 text-lg mb-2">{tip.title}</h3>
+                <p class="text-gray-600 text-sm leading-relaxed font-medium">{tip.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section>
+        <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-8">❓ أسئلة شائعة عن الخدمة</h2>
+        <div class="space-y-4">
+          {faqs.map((faq, i) => (
+            <details
+              class="group bg-white border border-gray-200 shadow-sm rounded-2xl overflow-hidden hover:border-blue-200 transition-colors"
+              id={`faq-${slug}-${i}`}
+            >
+              <summary
+                class="flex items-center justify-between gap-4 p-6 cursor-pointer
+                       text-gray-900 font-bold text-lg select-none
+                       list-none [&::-webkit-details-marker]:hidden"
+              >
+                <span>{faq.q}</span>
+                <span class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center shrink-0 group-open:bg-blue-50 transition-colors">
+                  <svg class="w-5 h-5 text-gray-500 group-open:text-blue-600 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" /></svg>
+                </span>
+              </summary>
+              <div class="px-6 pb-6 pt-0">
+                <p class="text-gray-600 leading-relaxed font-medium border-t border-gray-100 pt-4">{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- CTA Block -->
+      <section class="bg-blue-600 rounded-[32px] p-8 sm:p-12 text-center shadow-xl shadow-blue-600/20 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNHYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMC0zMFYwaC0ydjRoLTR2Mmg0djRoMnYtNGg0VjRoLTR6bS0yMCAxMnYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMTAgMThWMThoLTIydjRoLTR2Mmg0djRoMnYtNGg0em0tMTAgMjh2LTRoLTJ2NGgtNHYyaDR2NGgydi00aDR2LTJoLTR6bTMyIDB2LTRoLTJ2NGgtNHYyaDR2NGgydi00aDR2LTJoLTR6bS0yMC0xMnYtNGgtMnY0aC00djJoNHY0aDJ2LTRoNHYtMmgtNHptMjAtMThWMThoLTJ2NGgtNHYyaDR2NGgydi00aDR2LTJoLTR6IiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L2c+PC9zdmc+')]"></div>
+        <div class="relative z-10">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-4xl mx-auto mb-6 shadow-md">🚀</div>
+          <h2 class="text-3xl font-black mb-4">هل أنت فني متميز؟</h2>
+          <p class="text-blue-100 text-lg mb-8 max-w-lg mx-auto font-medium">انضم إلى منصة Top5Fix وضاعف حجم عملك. التسجيل مجاني ولا يوجد عمولات خفية، العميل يتواصل معك مباشرة.</p>
+          <a href="/join" class="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-gray-50 font-bold text-lg px-8 py-4 rounded-2xl shadow-lg transition-transform hover:-translate-y-1">
+            سجل كصنايعي الآن
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ══ Footer ══ -->
+  <footer class="bg-white border-t border-gray-200 py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+        <a href="/" class="flex items-center gap-2 font-black text-2xl text-gray-900">
+          <span class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md">🔧</span>
+          <span>Top5<span class="text-blue-600">Fix</span></span>
+        </a>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8 font-bold text-gray-500">
+          <a href="/" class="hover:text-blue-600 transition-colors">الرئيسية</a>
+          <a href="/about" class="hover:text-blue-600 transition-colors">من نحن</a>
+          <a href="/join" class="hover:text-blue-600 transition-colors">انضم كصنايعي</a>
+          <a href="/contact" class="hover:text-blue-600 transition-colors">تواصل معنا</a>
+          <a href="/privacy" class="hover:text-blue-600 transition-colors">سياسة الخصوصية</a>
+          <a href="/terms" class="hover:text-blue-600 transition-colors">شروط الاستخدام</a>
+        </div>
+      </div>
+      <div class="text-center text-gray-400 font-semibold text-sm border-t border-gray-100 pt-8">
+        <p>© {new Date().getFullYear()} Top5Fix.com. الدليل الموثوق للصنايعية في مصر.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ Script ══ -->
+  <script>
+    // 1. Filter Logic
+    function filterCraftsmen(filter: string) {
+      const items = document.querySelectorAll('.craftsman-item') as NodeListOf<HTMLElement>;
+      const buttons = document.querySelectorAll('.filter-btn') as NodeListOf<HTMLElement>;
+
+      buttons.forEach(btn => {
+        btn.classList.remove('active-filter', 'bg-blue-600', 'text-white', 'shadow-sm');
+        btn.classList.add('text-gray-500', 'hover:text-gray-900', 'hover:bg-gray-100');
+      });
+
+      const activeBtn = document.getElementById(`filter-${filter}`) as HTMLElement;
+      if (activeBtn) {
+        activeBtn.classList.remove('text-gray-500', 'hover:text-gray-900', 'hover:bg-gray-100');
+        activeBtn.classList.add('active-filter', 'bg-blue-600', 'text-white', 'shadow-sm');
+      }
+
+      items.forEach(item => {
+        if (filter === 'all' || item.dataset.gov === filter) {
+          item.style.display = '';
+          item.style.animation = 'fadeIn 0.4s ease';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+    (window as any).filterCraftsmen = filterCraftsmen;
+
+    // 2. Daily Shuffle Logic
+    function shuffleDaily() {
+      const grid = document.getElementById('craftsmen-grid');
+      if (!grid) return;
+      
+      const cards = Array.from(grid.children) as HTMLElement[];
+      const daySeed = Math.floor(Date.now() / 86400000); // Changes exactly every 24 hours
+      
+      let seed = daySeed;
+      function seededRandom() {
+        const x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+      }
+      
+      cards.sort(() => seededRandom() - 0.5);
+      
+      cards.forEach(card => grid.appendChild(card));
+    }
+
+    shuffleDaily();
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+  </style>
+
+</BaseLayout>

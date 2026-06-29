@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="شروط الاستخدام — Top5Fix" description="شروط الاستخدام والأحكام الخاصة بمنصة Top5Fix.">
+  <nav class="bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-gray-900 font-black text-xl">
+        <span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">🔧</span>
+        Top5<span class="text-blue-600">Fix</span>
+      </a>
+      <a href="/" class="text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors">العودة للرئيسية</a>
+    </div>
+  </nav>
+
+  <main class="bg-gray-50 pt-16 pb-24 min-h-[80vh]">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 shadow-sm">
+        <h1 class="text-4xl font-black text-gray-900 mb-8 text-center">شروط الاستخدام</h1>
+        
+        <div class="space-y-6 text-gray-600 font-medium leading-relaxed text-base">
+          <p>مرحباً بك في موقع Top5Fix. باستخدامك لهذا الموقع، فإنك توافق على الالتزام بشروط الاستخدام التالية. يُرجى قراءتها بعناية.</p>
+          
+          <h2 class="text-xl font-black text-gray-900 pt-4">1. دور المنصة</h2>
+          <p>منصة Top5Fix هي مجرد دليل ترويجي يعرض تفاصيل الاتصال الخاصة بالفنيين والصنايعية المقيّمين إيجابياً. نحن لا نوظف هؤلاء الفنيين ولا نتحكم في أفعالهم أو الأسعار النهائية التي يتم الاتفاق عليها. نحن نسهل عملية التواصل فقط.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">2. حدود المسؤولية</h2>
+          <p>بينما نبذل قصارى جهدنا للتحقق من مصداقية الفنيين المعروضين وتحديث التقييمات، إلا أن منصة Top5Fix لا تتحمل أي مسؤولية قانونية أو مالية عن أي ضرر، تلف، أو خلاف يحدث بين العميل والفني خلال أو بعد أداء الخدمة. العميل هو المسؤول الأول عن التحقق من الاتفاق، السعر، والضمان قبل بدء العمل.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">3. التقييمات والمراجعات</h2>
+          <p>يُسمح للعملاء بتقديم تقييمات للخدمات التي حصلوا عليها. نحتفظ بالحق في حذف أي تقييمات تحتوي على لغة مسيئة أو يُشتبه في كونها وهمية أو كيدية.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">4. حقوق الملكية</h2>
+          <p>جميع المحتويات المعروضة على هذا الموقع من نصوص، تصاميم، وشعارات هي ملكية حصرية لمنصة Top5Fix ولا يجوز نقلها أو إعادة استخدامها بدون إذن كتابي مسبق.</p>
+
+          <h2 class="text-xl font-black text-gray-900 pt-4">5. التعديلات</h2>
+          <p>نحتفظ بالحق في تعديل هذه الشروط في أي وقت. استمرارك في استخدام الموقع بعد إجراء أي تعديلات يُعد موافقة ضمنية على الشروط الجديدة.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white border-t border-gray-200 py-12">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 font-bold text-gray-500 mb-6 text-sm">
+        <a href="/" class="hover:text-blue-600 transition-colors">الرئيسية</a>
+        <a href="/about" class="hover:text-blue-600 transition-colors">من نحن</a>
+        <a href="/join" class="hover:text-blue-600 transition-colors">انضم كصنايعي</a>
+        <a href="/contact" class="hover:text-blue-600 transition-colors">تواصل معنا</a>
+        <a href="/privacy" class="hover:text-blue-600 transition-colors">سياسة الخصوصية</a>
+        <a href="/terms" class="text-blue-600 transition-colors">شروط الاستخدام</a>
+      </div>
+      <p class="text-gray-400 font-semibold text-xs">© {new Date().getFullYear()} Top5Fix.com. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+</BaseLayout>
