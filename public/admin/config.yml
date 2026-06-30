@@ -31,7 +31,7 @@ collections:
           - { label: "رقم الاتصال", name: "phone", widget: "string" }
           - { label: "رقم الواتساب (اختياري)", name: "whatsapp", widget: "string", required: false }
           - { label: "المحافظة", name: "governorate", widget: "select", options: ["القاهرة", "الجيزة"] }
-          - { label: "مسار الصورة الرمزية", name: "avatar", widget: "string", default: "/images/craftsman.png" }
+          - { label: "مسار الصورة الرمزية", name: "avatar", widget: "image", default: "/images/craftsman.png" }
       - { label: "رابط الصفحة", name: "slug", widget: "string" }
       - { label: "اسم المهنة (مفرد)", name: "profession", widget: "string" }
       - { label: "اسم المهنة (جمع)", name: "professionPlural", widget: "string" }
